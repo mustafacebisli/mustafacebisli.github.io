@@ -3,36 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budgeto</title>
+    <meta name="description" content="Budgeto - Kişisel bütçe ve harcama takibi uygulaması">
+    <title>Budgeto - Bütçe ve Harcama Takip Uygulaması</title>
     <style>
+        :root {
+            --primary-color: #007AFF;
+            --secondary-color: #5856D6;
+            --accent-color: #34C759;
+            --text-color: #333333;
+            --light-text: #ffffff;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            --header-gradient: linear-gradient(135deg, #007AFF, #5856D6);
+            --section-gradient: linear-gradient(135deg, #f8f9fa, #ffffff);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #f8f9fa;
+                --bg-color: #121212;
+                --card-bg: #1e1e1e;
+                --card-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                --section-gradient: linear-gradient(135deg, #121212, #1e1e1e);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #007AFF, #5856D6);
-            color: white;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .header {
+            background: var(--header-gradient);
+            color: var(--light-text);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--bg-color);
+            clip-path: polygon(0 60%, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .app-links {
+            margin-top: 2rem;
+        }
+
+        .app-button {
+            display: inline-block;
+            background: var(--light-text);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .app-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            color: var(--secondary-color);
+        }
+
+        section {
+            padding: 80px 0;
+            background: var(--section-gradient);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .contact {
+            background: var(--header-gradient);
+            color: var(--light-text);
+            padding: 80px 0;
             text-align: center;
         }
-        .container {
-            padding: 2rem;
+
+        .contact h2 {
+            margin-bottom: 30px;
         }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+
+        .contact-email {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin-top: 20px;
+            color: var(--light-text);
+            font-weight: bold;
+            transition: background 0.3s;
         }
-        p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+
+        .contact-email:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: var(--light-text);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Budgeto</h1>
-        <p>Bütçe ve harcama takibi uygulaması</p>
-    </div>
+    <header class="header">
+        <div class="container">
+            <h1>Budgeto</h1>
+            <p>Bütçenizi akıllıca yönetin, tasarruflarınızı artırın!</p>
+            <div class="app-links">
+                <a href="#" class="app-button">App Store</a>
+                <a href="#" class="app-button">Google Play</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">Özellikler</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Gelir ve Gider Takibi</h3>
+                    <p>Tüm gelir ve giderlerinizi kategorilere göre düzenleyin, finansal durumunuzu anlık olarak görüntüleyin.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Detaylı İstatistikler</h3>
+                    <p>Harcama alışkanlıklarınızı grafiklerle analiz edin, tasarruf fırsatlarını keşfedin.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Bütçe Planlaması</h3>
+                    <p>Kategorilere göre bütçe hedefleri belirleyin, harcamalarınızı kontrol altında tutun.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Budgeto Hakkında</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+                Budgeto, finansal durumunuzu yönetmenizi kolaylaştıran kullanıcı dostu bir bütçe ve harcama takip uygulamasıdır. 
+                Modern tasarımı ve güçlü özellikleriyle finans yönetiminizi daha etkili hale getirin.
+                Basit ve sezgisel arayüzü sayesinde tüm gelir ve giderlerinizi kolayca takip edin, hedeflerinize daha hızlı ulaşın!
+            </p>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>İletişim</h2>
+            <p>Sorularınız mı var? Geri bildirim göndermek mi istiyorsunuz?</p>
+            <a href="mailto:butgetofinans@gmail.com" class="contact-email">butgetofinans@gmail.com</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Budgeto. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
 </body>
 </html>
