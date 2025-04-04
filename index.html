@@ -152,7 +152,11 @@
         <div class="container">
             <h2>İletişim</h2>
             <p>Sorularınız mı var? Geri bildirim göndermek mi istiyorsunuz?</p>
-            <a href="mailto:butgetofinans@gmail.com" class="contact-email">E-posta Gönder</a>
+            <form class="contact-form">
+                <input type="text" id="emailSubject" placeholder="Mail Başlığı" class="form-input">
+                <textarea id="emailBody" placeholder="Mail Açıklaması" class="form-textarea"></textarea>
+                <button type="button" onclick="sendEmail()" class="contact-email">Mail Gönder</button>
+            </form>
         </div>
     </section>
 
@@ -161,5 +165,14 @@
             <p>&copy; 2025 Budgeto. Tüm hakları saklıdır.</p>
         </div>
     </footer>
+
+    <script>
+        function sendEmail() {
+            const subject = document.getElementById('emailSubject').value;
+            const body = document.getElementById('emailBody').value;
+            const mailtoLink = `mailto:butgetofinans@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
 </body>
 </html>
