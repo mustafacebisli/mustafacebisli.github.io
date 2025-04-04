@@ -259,9 +259,9 @@
         <h2>İletişim</h2>
         <p>Sorularınız mı var? Geri bildirim göndermek mi istiyorsunuz?</p>
 
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Mesajınız alındı. Teşekkürler!');">
-            <input type="text" placeholder="Mail Başlığı" required />
-            <textarea placeholder="Mail Açıklaması" required></textarea>
+        <form class="contact-form" onsubmit="event.preventDefault(); sendEmail();">
+            <input type="text" id="emailSubject" placeholder="Mail Başlığı" required />
+            <textarea id="emailBody" placeholder="Mail Açıklaması" required></textarea>
             <button type="submit">Mail Gönder</button>
         </form>
 
